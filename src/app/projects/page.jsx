@@ -14,7 +14,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function ProjectsSection() {
   const headingRef = useRef(null);
-  const sectionRef = useRef(null);
 
   /* ---------- SPLIT TEXT HEADING ---------- */
   useEffect(() => {
@@ -43,15 +42,12 @@ export default function ProjectsSection() {
     gsap.utils.toArray(".project-card").forEach((card) => {
       gsap.fromTo(
         card,
-        {
-          opacity: 0,
-          y: 40,
-        },
+        { opacity: 0, y: 40 },
         {
           opacity: 1,
           y: 0,
           duration: 0.5,
-          delay: 0.5,
+          delay: 0.3,
           ease: "power2.out",
           scrollTrigger: {
             trigger: card,
@@ -64,20 +60,30 @@ export default function ProjectsSection() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="pt-32">
+    <section className="relative pt-32">
+      {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/90 to-slate-950" />
+        {/* LIGHT */}
+        <div className="absolute inset-0 bg-gradient-to-b from-slate-50 via-slate-100 to-slate-50 dark:bg-none" />
+        {/* DARK */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-b from-slate-950 via-slate-900/90 to-slate-950" />
+
+        {/* GLOW */}
         <div
-          className="absolute left-1/2 top-0 h-[600px] w-[600px]
-          -translate-x-1/2 rounded-full bg-cyan-500/10 blur-[140px]"
+          className="
+            absolute left-1/2 top-0 h-[600px] w-[600px]
+            -translate-x-1/2 rounded-full blur-[140px]
+             dark:bg-cyan-500/10
+          "
         />
       </div>
-      <div className="mx-auto max-w-7xl px-6 relative">
-        {/* ---------- SECTION HEADING ---------- */}
+
+      <div className="relative mx-auto max-w-7xl px-6">
+        {/* ---------- HEADING ---------- */}
         <div className="mb-24 text-center">
           <h2
             ref={headingRef}
-            className="text-4xl md:text-6xl font-semibold tracking-tight text-slate-100"
+            className="text-4xl md:text-6xl font-semibold tracking-tight text-slate-900 dark:text-slate-100"
           >
             {"Selected Projects".split("").map((char, i) => (
               <span key={i} className="inline-block">
@@ -86,7 +92,7 @@ export default function ProjectsSection() {
             ))}
           </h2>
 
-          <p className="mt-6 max-w-xl mx-auto text-lg text-slate-400">
+          <p className="mt-6 max-w-xl mx-auto text-lg text-slate-600 dark:text-slate-400">
             A selection of projects that reflect my approach to building
             scalable, production-ready web applications.
           </p>
@@ -97,7 +103,12 @@ export default function ProjectsSection() {
           {projects.map((project, index) => (
             <Card
               key={project.id}
-              className="project-card border-slate-800 bg-slate-900/40 backdrop-blur"
+              className="
+                project-card backdrop-blur
+                border border-slate-200 bg-white
+                dark:border-slate-800 dark:bg-slate-900/40
+                shadow-sm dark:shadow-none
+              "
             >
               <CardContent className="p-0">
                 <div
@@ -106,35 +117,33 @@ export default function ProjectsSection() {
                   }`}
                 >
                   {/* IMAGE */}
-                  <div
-                    className={` ${index % 2 !== 0 ? "lg:col-start-2" : ""}`}
-                  >
+                  <div className={`${index % 2 !== 0 ? "lg:col-start-2" : ""}`}>
                     <Image
                       src={project.image}
                       alt={project.title}
                       width={1000}
                       height={900}
-                      className="rounded-2xl object-cover relative z-10 bottom-10"
+                      className="rounded-2xl object-cover relative z-10 bottom-6"
                       priority
                     />
                   </div>
 
                   {/* CONTENT */}
                   <div className="space-y-6">
-                    <h3 className="text-3xl font-semibold text-slate-100">
+                    <h3 className="text-3xl font-semibold text-slate-900 dark:text-slate-100">
                       {project.title}
                     </h3>
 
-                    {/* DESCRIPTION POINTS */}
+                    {/* DESCRIPTION */}
                     <div className="max-w-xl space-y-3">
-                      {project.description.map((item, i) => (
+                      {project.description.map((item) => (
                         <div key={item.id} className="flex gap-3">
-                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-400" />
+                          <span className="mt-2 h-1.5 w-1.5 rounded-full bg-cyan-500" />
                           <div>
-                            <p className="text-slate-200 font-medium text-sm">
+                            <p className="text-sm font-medium text-slate-800 dark:text-slate-200">
                               {item.title}
                             </p>
-                            <p className="text-slate-400 text-sm leading-relaxed">
+                            <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-400">
                               {item.description}
                             </p>
                           </div>
@@ -144,11 +153,14 @@ export default function ProjectsSection() {
 
                     {/* TECH STACK */}
                     <div className="flex flex-wrap gap-3">
-                      {project.tech.map((t, i) => (
+                      {project.tech.map((t) => (
                         <div
                           key={t.name}
-                          className="flex h-10 w-10 items-center justify-center
-                    rounded-lg border border-slate-700 bg-slate-600/80"
+                          className="
+                            flex h-10 w-10 items-center justify-center rounded-lg
+                            border border-slate-300 bg-slate-50
+                            dark:border-slate-700 dark:bg-slate-800/80
+                          "
                         >
                           <Image
                             src={t.icon}
@@ -160,15 +172,18 @@ export default function ProjectsSection() {
                       ))}
                     </div>
 
-                    {/* LINKS */}
+                    {/* LINK */}
                     <div className="flex gap-4 pt-4">
                       {project.githubUrl && (
                         <Link
                           href={project.githubUrl}
                           target="_blank"
-                          className="inline-flex items-center gap-2 rounded-lg
-                    bg-cyan-500 px-5 py-2.5 text-sm font-medium text-slate-950
-                    hover:bg-cyan-400 transition"
+                          className="
+                            inline-flex items-center gap-2 rounded-lg
+                            bg-slate-800 hover:bg-slate-900 px-5 py-2.5 text-sm font-medium text-white
+                            hover:bg-cyan-700 transition
+                            dark:bg-cyan-500 dark:text-slate-950 dark:hover:bg-cyan-400
+                          "
                         >
                           View Project
                           <ExternalLink className="h-4 w-4" />
@@ -182,6 +197,7 @@ export default function ProjectsSection() {
           ))}
         </div>
       </div>
+
       <QuoteSection />
     </section>
   );

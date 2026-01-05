@@ -12,7 +12,7 @@ export default function Home() {
       <StaggerContainer>
         <div className="flex flex-col gap-4">
           <StaggerItem>
-            <h2 className="text-4xl font-semibold tracking-tight text-slate-100 mb-6 px-6 text-center">
+            <h2 className="text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 mb-6 px-6 text-center">
               Featured Projects
             </h2>
           </StaggerItem>

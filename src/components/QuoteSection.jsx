@@ -32,11 +32,19 @@ export default function QuoteSection() {
     <section className="relative py-36 px-6 overflow-hidden flex justify-center">
       {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent" />
+        {/* LIGHT MODE */}
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-100 via-slate-50 to-transparent dark:bg-none" />
+
+        {/* DARK MODE */}
+        <div className="hidden dark:block absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/80 to-transparent" />
+
+        {/* GLOW */}
         <div
-          className="absolute left-1/2 top-1/2 h-[420px] w-[420px]
-          -translate-x-1/2 -translate-y-1/2 rounded-full
-          bg-cyan-500/10 blur-[120px]"
+          className="
+            absolute left-1/2 top-1/2 h-[420px] w-[420px]
+            -translate-x-1/2 -translate-y-1/2 rounded-full blur-[120px]
+             dark:bg-cyan-500/10
+          "
         />
       </div>
 
@@ -46,11 +54,20 @@ export default function QuoteSection() {
         className="relative max-w-3xl text-center opacity-0"
       >
         <p
-          className="text-2xl md:text-3xl lg:text-4xl
-          font-medium tracking-tight leading-relaxed text-slate-200"
+          className="
+            text-2xl md:text-3xl lg:text-4xl
+            font-medium tracking-tight leading-relaxed
+            text-slate-800 dark:text-slate-200
+          "
         >
           Progress is built by showing up{" "}
-          <span className="bg-gradient-to-r from-cyan-400 to-sky-500 bg-clip-text text-transparent">
+          <span
+            className="
+              bg-gradient-to-r from-blue-600 to-indigo-500
+              dark:from-cyan-400 dark:to-sky-500
+              bg-clip-text text-transparent
+            "
+          >
             consistently
           </span>
           , even when motivation fades.

@@ -1,9 +1,9 @@
-
 import "./globals.css";
 import { Poppins } from "next/font/google";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Toaster } from "react-hot-toast";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -19,18 +19,28 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-     <body className={`${poppins.className} bg-[#020617] text-slate-100 antialiased`}>
-          {/* <Header /> */}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${poppins.className} antialiased
+    text-slate-900 dark:text-slate-100
+
+    bg-gradient-to-b from-slate-50 via-slate-100 to-slate-50
+    dark:bg-none dark:bg-[#020617]`}
+      >
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
           <Header />
-
           <main className="min-h-screen ">{children}</main>
-
           <Toaster position="top-center" />
 
           {/* <Footer /> */}
           <Footer />
-        </body>
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
