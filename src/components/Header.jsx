@@ -51,6 +51,7 @@ export default function Header() {
 
             {/* NAV */}
             <StaggerItem>
+              <div className="flex items-center gap-6">
               <nav className="hidden md:flex items-center gap-8 text-sm">
                 <Link
                   href="/"
@@ -82,8 +83,9 @@ export default function Header() {
                 </Link>
 
                 {/* THEME TOGGLE */}
-                <ThemeToggle />
               </nav>
+              <ThemeToggle />
+              </div>
             </StaggerItem>
           </div>
         </StaggerContainer>
