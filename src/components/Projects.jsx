@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Github } from "lucide-react";
+import { Github, ExternalLink } from "lucide-react";
 
 export default function Projects({
   title,
@@ -18,6 +18,7 @@ export default function Projects({
   image,
   tech = [],
   githubUrl,
+  liveUrl,
 }) {
   return (
     <Card
@@ -61,14 +62,14 @@ export default function Projects({
         <div className="flex flex-wrap w-full gap-2 max-w-[340px]">
           {tech.map((item) => (
             <Badge
-              key={item}
+              key={item.id}
               variant="secondary"
               className="
                 bg-slate-100 text-slate-600
                 dark:bg-slate-800 dark:text-slate-300
               "
             >
-              {item}
+              {item.name}
             </Badge>
           ))}
         </div>
@@ -89,6 +90,23 @@ export default function Projects({
             >
               <Github className="h-4 w-4" />
               Source Code
+            </Link>
+          </Button>
+        )}
+        {liveUrl && (
+          <Button
+            variant="outline"
+            size="sm"
+            
+            asChild
+          >
+            <Link
+              href={liveUrl}
+              target="_blank"
+              className="flex items-center gap-2"
+            >
+              <ExternalLink className="h-4 w-4" />
+              Live Demo
             </Link>
           </Button>
         )}
